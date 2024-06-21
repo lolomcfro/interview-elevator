@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="bluestaq.ElevatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-06-21T18:00:28" hostname="DESKTOP-RPHPI7L" time="0.008">
+  <properties/>
+  <testcase name="dropOffTest()" classname="bluestaq.ElevatorTest" time="0.003"/>
+  <testcase name="pickupTest()" classname="bluestaq.ElevatorTest" time="0.001"/>
+  <testcase name="initTest()" classname="bluestaq.ElevatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
