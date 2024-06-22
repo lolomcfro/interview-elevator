@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="bluestaq.BuildingTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-06-21T18:00:28" hostname="DESKTOP-RPHPI7L" time="0.049">
+<testsuite name="bluestaq.BuildingTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-06-22T03:13:26" hostname="DESKTOP-RPHPI7L" time="0.041">
   <properties/>
-  <testcase name="badInitTest()" classname="bluestaq.BuildingTest" time="0.024"/>
-  <testcase name="elevatorDispatchTest()" classname="bluestaq.BuildingTest" time="0.012"/>
-  <testcase name="initTest()" classname="bluestaq.BuildingTest" time="0.001"/>
-  <testcase name="systemTest()" classname="bluestaq.BuildingTest" time="0.007"/>
+  <testcase name="badInitTest()" classname="bluestaq.BuildingTest" time="0.021"/>
+  <testcase name="singlePersonTest()" classname="bluestaq.BuildingTest" time="0.011"/>
+  <testcase name="intensiveTest()" classname="bluestaq.BuildingTest" time="0.003"/>
+  <testcase name="elevatorDispatchTest()" classname="bluestaq.BuildingTest" time="0.001"/>
+  <testcase name="initTest()" classname="bluestaq.BuildingTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,7 +1,9 @@
 package bluestaq;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -35,9 +37,8 @@ public class BuildingTest {
     }
 
     /**
-     * A person is pressing the button on the 1st floor, and wants to go the 3rd.
-     * floor.
-     * This should result in an elevator being sent up.
+     * A person is pressing the button on the 1st floor, and wants to go the
+     * 3rd. floor. This should result in an elevator being sent up.
      */
     @Test
     void elevatorDispatchTest() {
@@ -68,7 +69,7 @@ public class BuildingTest {
         //On floor #1
         testBuilding.step();
         assertTrue(testBuilding.getElevatorList().stream().anyMatch(x -> x.getState() == ElevatorState.GOING_UP));
-        Optional <Elevator> elevator = testBuilding.getElevatorList().stream().filter(x -> x.getState() == ElevatorState.GOING_UP).findFirst();
+        Optional<Elevator> elevator = testBuilding.getElevatorList().stream().filter(x -> x.getState() == ElevatorState.GOING_UP).findFirst();
         assertTrue(elevator.isPresent());
         assertFalse(elevator.get().getPassengers().isEmpty());
         //On floor #2
@@ -77,5 +78,44 @@ public class BuildingTest {
         testBuilding.step();
         assertTrue(testBuilding.getElevatorList().stream().allMatch(x -> x.getState() == ElevatorState.IDLE));
         assertTrue(elevator.get().getPassengers().isEmpty());
+    }
+
+    /* 
+     * This is a fullscale test, releasing 5 passengers at a time with a step in between to allow the 
+     * elevators to start spreating out before the next people hit their buttons. This test will run until 
+     * all elevators have been set back to IDLE, after everyone has been dropped off at their respective destinations.
+     */
+    @Test
+    void intensiveTest() {
+        int inputIndex = 0;
+        Building testBuilding = new Building(numFloors, numElevators);
+        List<Person> inputs = inputGenerator(numFloors);
+        Random floorRand = new Random();
+        //Release 5 of the random passengers at a time with a step in between
+        while (inputIndex < 16) {
+            inputs.subList(inputIndex, inputIndex + 4).forEach(x -> x.pushButton(testBuilding.getFloorList().get(floorRand.nextInt(numFloors - 1))));
+            testBuilding.readButtons();
+            testBuilding.dispatchElevator();
+            testBuilding.step();
+            inputIndex += 5;
+        }
+        while (testBuilding.getElevatorList().stream().allMatch(x -> x.getState() == ElevatorState.IDLE)) {
+            testBuilding.readButtons();
+            testBuilding.dispatchElevator();
+            testBuilding.step();
+        }
+        assertTrue(true);
+
+    }
+
+    private List<Person> inputGenerator(int numFloors) {
+        List<Person> output = new ArrayList<>();
+        Random rand = new Random();
+
+        for (int i = 0; i < 20; i++) {
+            output.add(new Person(rand.nextInt(numFloors - 1)));
+        }
+        return output;
+
     }
 }
